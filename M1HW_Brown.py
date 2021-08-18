@@ -64,6 +64,9 @@ def div():
         print("\nDivide")
         x = int(input("Enter a number: "))
         y = int(input("Enter a number: "))
+        if x == 0 or y == 0:
+            print("Please enter a number > 0")
+            keep_going = 0
         z = x / y
         print(x, '/', y, '=', z)
         
