@@ -4,9 +4,7 @@
 
 """
 _______________________________________________________________________________
-
 ______Sprint 1______ 
-
 -New Content-
    
 Main Menu:
@@ -19,17 +17,13 @@ Basic Calculator:
     equation through an if-elif-else structure then displays the answer to 
     the entered equation using the choosen operand entered.
 _______________________________________________________________________________
-
 ______Sprint 2______
-
 Basic Calculator
 -----------------
     refactored this function, the processing component to a new function named 
     calculator_core. Now sends the string to the function and recives a tuple 
     to unpack and display.
-
 -New Content-
-
 Answer Checker
 ----------------
     The user is displayed with 3 options.
@@ -41,11 +35,13 @@ Answer Checker
     -"Ten random questions" where the user will be prompted with ten random 
      question and they will have 3 chances to get it right before the answer 
      is given, at the end of the ten questions the user will get his/her score
-     out of ten.
+     out of ten.(Only uses addition, subtraction, and multiplication)
      
     -"Exit" brings the user back to the main menu.
 _______________________________________________________________________________
 """
+
+import random
 
 def main():
     """ Basic menu to send the user to other functions. """
@@ -101,7 +97,6 @@ def answer_checker():
     count = 0
     correct = 0
     incorrect = 0
-    list_length = 1
     
     while keep_going == True:
         print("\nAnswer Checker")
@@ -110,17 +105,17 @@ def answer_checker():
         
         if usr_inp == "1":
             print("Please enter 10 equations with the format: Number1+Number2")
-            for _ in range(10):
+            for _ in range(2):
                 x = input(">")
                 equation_list.append(x)
                 answer = calculator_core(x)
                 answer_list.append(answer[2])
-            
-            while list_length > 0:
-                list_length = len(answer_list)
-                while list_length > 0:
+              
+            while len(answer_list) > 0:            
+                while len(answer_list) > 0:
                     print(equation_list[index],"= ?")
                     i = int(input("Answer: "))
+                        
                     if i == answer_list[0]:
                         print("That is correct!")
                         correct += 1
@@ -136,11 +131,65 @@ def answer_checker():
                     elif i != answer_list[0]:
                         print("Sorry that was incorrect")
                         count += 1
-                            
+                        
             print("\nYou got", correct, "correct and", incorrect, "incorrect out of 10")
             
         elif usr_inp == "2":
-            pass
+            int_range = ['0','1','2','3','4','5','6','7','8','9','10','11','12']
+            x = []
+            y = []
+            o = []
+            e = []
+            index = 0
+            
+            for _ in range(10):
+                # First variable
+                i = random.randint(0,12)
+                k = int_range[i]
+                x.append(k)
+                
+                # Operator
+                operators = ['+','-','*']
+                i = random.randint(0,2)
+                k = operators[i]
+                o.append(k)                
+                
+                # Second variable
+                i = random.randint(0,12)
+                k = int_range[i]
+                y.append(k)                    
+
+                # Setting up equations
+                i = ''.join([x[index],o[index],y[index]])
+                answer = calculator_core(i)
+                answer_list.append(answer[2])
+                e.append(i)
+                index += 1
+                          
+            index = 0
+            while len(answer_list) > 0:            
+                while len(answer_list) > 0:
+                    print(e[index],"= ?")
+                    i = int(input("Answer: "))
+                        
+                    if i == answer_list[0]:
+                        print("That is correct!")
+                        correct += 1
+                        index += 1
+                        del answer_list[0]
+                        break
+                    elif count == 2:
+                        print("Sorry but the answer was:", answer_list[0],"\n")
+                        incorrect += 1
+                        count = 0
+                        index += 1
+                        del answer_list[0]
+                    elif i != answer_list[0]:
+                        print("Sorry that was incorrect")
+                        count += 1
+                        
+            print("\nYou got", correct, "correct and", incorrect, "incorrect out of 10")
+            
         elif usr_inp == "3":
             keep_going = False
         else:
@@ -205,7 +254,7 @@ def calculator_core(equate):
       y = int(split_equate[1])
       z = x * y
       return_L.extend((x,y,z))
-      return_L.append("+")
+      return_L.append("*")
       return return_L
       
     elif equate == "exit" or "quit":
