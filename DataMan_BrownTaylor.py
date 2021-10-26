@@ -55,7 +55,7 @@ Memory Bank
     - Asks the user how many questions they would like to be asked for this 
       specific game mode.
 _______________________________________________________________________________
-______Sprint 3______
+______Sprint 4______
 -New Content-
 Number Guesser
 ---------------
@@ -167,7 +167,26 @@ def memory_bank():
     memory_answer_core(equation_list,answer_list,c)
 
 def number_guesser():
+    keep_going = True
     print("Number Guesser")
+    SECRET_NUMBER = random.randint(1,100)
+    print("Please guess a number between 1-100")
+
+    while keep_going == True:
+        usr_inp = input("> ")
+        try:
+            usr_inp = int(usr_inp)
+            if usr_inp == SECRET_NUMBER:
+                print("That is the correct guess! Good Job!")
+                keep_going = False
+            elif usr_inp > SECRET_NUMBER:
+                print("That guess is too high. Please try again")
+            elif usr_inp < SECRET_NUMBER:
+                print("That guess is too low. Please try again")
+        except:
+            print("Please enter a vaild integer")
+
+
 
 
 def memory_answer_core(equation_list,answer_list,c):
