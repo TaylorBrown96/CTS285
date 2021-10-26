@@ -70,7 +70,6 @@ import random
 
 def main():
     """ Basic menu to send the user to other functions. """
-    
     keep_going = True
     
     while keep_going == True:
@@ -113,11 +112,15 @@ def regular_calculator():
             break
 
 def answer_checker():
-    """ See DocString at top (Sprint 2: Answer Checker)"""
+    """ 
+    - Asks the user how many equations they would like to enter
+    - Iterates through a for loop to take user equations and sends them to the calculator_core
+      function and send them back
+    - Returned equations are seperated and appended to lists(equation_list and answer_list)
+    - Sends both new lists to memory_answer_core function and asks the user to asnwer the questions.
+    """
     print("Answer Checker")
-    
-    equation_list = []
-    answer_list = []
+    equation_list, answer_list = [],[]
 
     c = int(input("How many questions would you like to input?"))
     print("Format Example: Number1+Number2")
@@ -130,15 +133,16 @@ def answer_checker():
     memory_answer_core(equation_list,answer_list,c)    
     
 def memory_bank():
+    """
+    - Asks the user how many questions they want to be asked 
+    - The program will automatically generate the first and second number and choose between 
+      multiplication, subtraction or addition.
+    - Then the program sends the generated equations to the memory_answer_core function and 
+      asks the user to asnwer the questions.
+    """
     print("Memory Bank")
-    equation_list = []
-    answer_list = []
-
     int_range = ['0','1','2','3','4','5','6','7','8','9','10','11','12']
-    x = []
-    y = []
-    o = []
-
+    equation_list, answer_list, x, y, o = [],[],[],[],[]
     c = int(input("How many questions would you like to be asked?"))
     
     for count in range(c):
@@ -167,6 +171,12 @@ def memory_bank():
     memory_answer_core(equation_list,answer_list,c)
 
 def number_guesser():
+    """
+    - Ask the user to guess a number between 1-100
+    - If the user guesses the correct number congradulate them and send back to menu
+    - If the user guesses a number lower than the secret number tell them and let them guess again
+    - If the user guesses a number higher than the secret number tell them and let them guess again 
+    """
     keep_going = True
     print("Number Guesser")
     SECRET_NUMBER = random.randint(1,100)
@@ -186,16 +196,14 @@ def number_guesser():
         except:
             print("Please enter a vaild integer")
 
-
-
-
 def memory_answer_core(equation_list,answer_list,c):
+    """
+    - Takes in three arguments and iterates through them and calculates the correct and incorrect 
+      counts then displays them.
+    """
     equation_list = equation_list
     answer_list = answer_list
-    index = 0
-    count = 0
-    correct = 0
-    incorrect = 0
+    index, count, correct, incorrect = 0,0,0,0
 
     while len(answer_list) > 0:            
         while len(answer_list) > 0:
@@ -230,8 +238,7 @@ def calculator_core(equate):
      - Preform appropriate process to equation and then return the results 
          in a tuple.
     """
-    split_equate = []
-    return_L = []
+    split_equate, return_L = [],[]
     
 # Addition
     if "+" in equate:
